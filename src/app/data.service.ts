@@ -9,12 +9,25 @@ export class DataService {
   constructor(private httpClient: HttpClient) { }
 
   getWeather() {
-    return this.httpClient.get<Weather>('http://localhost:3000');
+    return this.httpClient.get<Weather>('http://localhost:3000/meteo');
   }
 
   fetchStationboard() {
     return this.httpClient.get<Stationboard>('https://transport.opendata.ch/v1/stationboard?station=8591233');
   }
+
+  fetchEntsorgung() {
+    return this.httpClient.get<Calendar>('http://localhost:3000/entsorgung');
+  }
+}
+
+export interface Calendar {
+  result: [CalendarEntry]
+}
+
+export interface CalendarEntry {
+  date: string,
+  type: string
 }
 
 export interface Weather {

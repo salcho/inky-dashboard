@@ -10,13 +10,13 @@ export class WeatherComponent {
 
   weather?: Weather
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) { }
 
   loadWeather() {
     this.dataService.getWeather().subscribe(weather => this.weather = weather);
   }
 
   localizedDate(date: string) {
-    return new Date(date).toLocaleString("en-UK", { weekday: 'short' });
+    return new Date(date).toLocaleString("de-CH", { weekday: 'short' });
   }
 }
