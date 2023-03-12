@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Weather, WeatherService } from '../weather.service';
+import { Weather, DataService } from '../data.service';
 
 @Component({
   selector: 'app-weather',
@@ -10,10 +10,10 @@ export class WeatherComponent {
 
   weather?: Weather
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(private dataService: DataService) {}
 
   loadWeather() {
-    this.weatherService.getWeather().subscribe(weather => this.weather = weather);
+    this.dataService.getWeather().subscribe(weather => this.weather = weather);
   }
 
   localizedDate(date: string) {

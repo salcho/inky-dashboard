@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Departure, ZvvService } from '../zvv.service';
+import { Departure, DataService } from '../data.service';
 
 @Component({
   selector: 'app-zvv',
@@ -11,10 +11,10 @@ export class ZvvComponent {
   trams: Departure[] = [];
   buses: Departure[] = [];
 
-  constructor(private zvvService: ZvvService) {}
+  constructor(private dataService: DataService) {}
 
   loadStationboard() {
-    this.zvvService.fetchStationboard().subscribe(latest => {
+    this.dataService.fetchStationboard().subscribe(latest => {
       const stationboard: Departure[] = latest.stationboard;
       
       const trams = new Map();
