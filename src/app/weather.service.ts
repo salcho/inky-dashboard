@@ -9,20 +9,19 @@ export class WeatherService {
   constructor(private httpClient: HttpClient) { }
 
   getWeather() {
-    return this.httpClient
-      .get<Weather>(
-        'https://app-prod-ws.meteoswiss-app.ch/v1/plzDetail?plz=803200',
-        {});
+    return this.httpClient.get<Weather>('http://localhost:3000');
   }
 }
 
 export interface Weather {
   currentWeather: {
     icon: number
+    iconName?: string
   }
   forecast: [{
     dayDate: string,
     iconDay: number,
+    iconName?: string,
     precipitation: number,
     temperatureMax: number,
     temperatureMin: number

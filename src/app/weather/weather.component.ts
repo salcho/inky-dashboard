@@ -15,4 +15,8 @@ export class WeatherComponent {
   loadWeather() {
     this.weatherService.getWeather().subscribe(weather => this.weather = weather);
   }
+
+  localizedDate(date: string) {
+    return new Date(date).toLocaleString("en-UK", { weekday: 'short' });
+  }
 }

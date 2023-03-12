@@ -20,27 +20,27 @@ export class ZvvComponent {
       const trams = new Map();
       const buses = new Map();
 
-      for (const mean of stationboard) {
-        if (mean.category === "T") {
-          if (!trams.has(mean.number)) {
-            trams.set(mean.number, mean);
+      for (const current of stationboard) {
+        if (current.category === "T") {
+          if (!trams.has(current.number)) {
+            trams.set(current.number, current);
             continue;
           }
 
-          if (mean.stop.departureTimestamp > trams.get(mean.number).stop.departureTimestamp) {
-            trams.set(mean.number, mean);
+          if (current.stop.departureTimestamp < trams.get(current.number).stop.departureTimestamp) {
+            trams.set(current.number, current);
             continue;
           }
         }
 
-        if (mean.category === "B") {
-          if (!buses.has(mean.number)) {
-            buses.set(mean.number, mean);
+        if (current.category === "B") {
+          if (!buses.has(current.number)) {
+            buses.set(current.number, current);
             continue;
           }
           
-          if (mean.stop.departureTimestamp > buses.get(mean.number).stop.departureTimestamp) {
-            buses.set(mean.number, mean);
+          if (current.stop.departureTimestamp < buses.get(current.number).stop.departureTimestamp) {
+            buses.set(current.number, current);
           }
         }
       }
@@ -54,7 +54,7 @@ export class ZvvComponent {
 
   localizedDeparture(departureTimestamp: number): string {
     return new Date(departureTimestamp)
-      .toLocaleString("en-UK", { hour: '2-digit', minute: '2-digit' });
+      .toLocaleString("de-CH", { hour: '2-digit', minute: '2-digit' });
   }
 
   localizedDestination(to: string): string {
