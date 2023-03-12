@@ -8,14 +8,17 @@ export class DataService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // undocumented - https://github.com/search?q=meteoswiss%20api&type=repositories
   getWeather() {
     return this.httpClient.get<Weather>('http://localhost:3000/meteo');
   }
 
+  // https://transport.opendata.ch/docs.html
   fetchStationboard() {
     return this.httpClient.get<Stationboard>('https://transport.opendata.ch/v1/stationboard?station=8591233');
   }
 
+  // https://www.stadt-zuerich.ch/portal/de/index/ogd/anwendungen/2019/open_erz_api.html
   fetchEntsorgung() {
     return this.httpClient.get<Calendar>('http://localhost:3000/entsorgung');
   }
