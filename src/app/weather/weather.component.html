@@ -1,0 +1,13 @@
+<div class="card-container">
+    <button class="card card-small" (click)="loadWeather()" tabindex="0">
+        <span class="material-symbols-outlined">thermostat</span>
+        <span>Load Weather</span>
+    </button>
+</div>
+
+
+<div class="forecast" *ngIf="weather">
+    <button class="day" *ngFor="let day of weather.forecast" >
+        <span class="material-symbols-outlined">thermostat</span>
+    </button>
+</div>

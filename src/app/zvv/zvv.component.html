@@ -1,0 +1,48 @@
+<div class="content" role="main">
+    <h2>Stationboard</h2>
+    <p>Next departures from Klusplatz</p>
+
+    <input type="hidden" #selection>
+
+    <div class="card-container">
+        <button class="card card-small" (click)="loadStationboard()" tabindex="0">
+            <span class="material-symbols-outlined">train</span>
+            <span>Load Stationboard</span>
+        </button>
+    </div>
+
+    <h3 *ngIf="trams.length">Trams</h3>
+    <div class="card-container card-small stationboard">
+        <button type="button" class="card departure" *ngFor="let departure of trams">
+            <span class="badge">
+                <span class="material-symbols-outlined type">tram</span>
+                <span class="number">{{departure.number}}</span>
+            </span>
+            
+            <span class="name">{{localizedDestination(departure.to)}}</span>
+            
+            <span class="time">
+                <span class="material-symbols-outlined">schedule</span>
+                <span>{{localizedDeparture(departure.stop.departureTimestamp*1000)}}</span>
+            </span>
+        </button>
+    </div>
+
+    <h3 *ngIf="trams.length">Buses</h3>
+    <div class="card-container stationboard">
+        <button type="button" class="card departure" *ngFor="let departure of buses">
+            <span class="badge">
+                <span *ngIf="departure.category == 'B'" class="material-symbols-outlined type">local_shipping</span>
+                <span class="number">{{departure.number}}</span>
+            </span>
+            
+            
+            <span class="name">{{localizedDestination(departure.to)}}</span>
+
+            <span class="time">
+                <span class="material-symbols-outlined">schedule</span>
+                <span>{{localizedDeparture(departure.stop.departureTimestamp*1000)}}</span>
+            </span>
+        </button>
+    </div>
+</div>

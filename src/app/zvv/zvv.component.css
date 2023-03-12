@@ -1,0 +1,32 @@
+.stationboard {
+    flex-wrap: nowrap;
+}
+
+.departure .badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.departure .time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 4px 0 0 4px;
+}
+
+.departure .name {
+    display: inline-block;
+    color: black;
+    margin-right: .8em;
+    margin-left: .8em;
+    margin-bottom: .8em;
+    border-radius: 4px 0 0 4px;
+}
+
+.departure .type {
+    display: inline-block;
+    line-height: 1em;
+    /* margin-right: .8em; */
+    border-radius: 4px 0 0 4px;
+}
