@@ -1,41 +1,22 @@
-<div class="content" role="main">
-    <h2>Weather</h2>
-    <div class="card-container">
-        <button class="card card-small" (click)="loadWeather()" tabindex="0">
-            <span class="material-symbols-outlined">thermostat</span>
-            <span>Load Weather</span>
-        </button>
-    </div>
-
-
-    <div *ngIf="weather">
-        <button class="forecast" *ngFor="let day of weather.forecast">
-            <!-- switch reference at https://www.meteoswiss.admin.ch/dam/jcr:cb03e6a3-521f-4608-8a09-c9c03d742272/Wettericons_20220214.pdf -->
-            <div class="day">
-                <span>{{localizedDate(day.dayDate)}}</span>
-                <div [ngSwitch]="true">
-                    <span class="material-symbols-outlined"
-                        *ngSwitchCase="day.iconDay >= 1 && day.iconDay <= 3">sunny</span>
-                    <span class="material-symbols-outlined"
-                        *ngSwitchCase="day.iconDay >= 4 && day.iconDay <= 5">cloud</span>
-                    <span class="material-symbols-outlined"
-                        *ngSwitchCase="day.iconDay >= 6 && day.iconDay <= 11">rainy</span>
-                    <span class="material-symbols-outlined"
-                        *ngSwitchCase="day.iconDay >= 12 && day.iconDay <= 25">thunderstorm</span>
-                    <span class="material-symbols-outlined"
-                        *ngSwitchCase="day.iconDay >= 26 && day.iconDay <= 35">foggy</span>
-                    <span class="material-symbols-outlined"
-                        *ngSwitchCase="day.iconDay >= 36 && day.iconDay <= 42">sunny_snowing</span>
-                    <span class="material-symbols-outlined"
-                        *ngSwitchCase="day.iconDay >= 101 && day.iconDay <= 105">sunny</span>
-                    <span class="material-symbols-outlined"
-                        *ngSwitchCase="day.iconDay >= 106 && day.iconDay <= 110">nights_stay</span>
-                    <span class="material-symbols-outlined" *ngSwitchDefault="">quiz</span>
-                    <span *ngSwitchDefault="">quiz</span>
-                </div>
-                <span>{{day.temperatureMin}} - {{day.temperatureMax}}</span>
+<div *ngIf="weather">
+    <button mat-raised-button color="primary" class="forecast" *ngFor="let day of weather.forecast">
+        <!-- switch reference at https://www.meteoswiss.admin.ch/dam/jcr:cb03e6a3-521f-4608-8a09-c9c03d742272/Wettericons_20220214.pdf -->
+        <div>
+            {{localizedDate(day.dayDate)}}
+            <div [ngSwitch]="true">
+                <mat-icon *ngSwitchCase="day.iconDay >= 1 && day.iconDay <= 3">sunny</mat-icon>
+                <mat-icon *ngSwitchCase="day.iconDay >= 4 && day.iconDay <= 5">cloud</mat-icon>
+                <mat-icon *ngSwitchCase="day.iconDay >= 6 && day.iconDay <= 11">rainy</mat-icon>
+                <mat-icon *ngSwitchCase="day.iconDay >= 12 && day.iconDay <= 25">thunderstorm</mat-icon>
+                <mat-icon *ngSwitchCase="day.iconDay >= 26 && day.iconDay <= 35">foggy</mat-icon>
+                <mat-icon *ngSwitchCase="day.iconDay >= 36 && day.iconDay <= 42">sunny_snowing</mat-icon>
+                <mat-icon *ngSwitchCase="day.iconDay >= 101 && day.iconDay <= 105">sunny</mat-icon>
+                <mat-icon *ngSwitchCase="day.iconDay >= 106 && day.iconDay <= 110">nights_stay</mat-icon>
+                <mat-icon *ngSwitchDefault="">quiz</mat-icon>
+                <span *ngSwitchDefault="">quiz</span>
             </div>
+            <span>{{day.temperatureMin}} - {{day.temperatureMax}}</span>
+        </div>
 
-        </button>
-    </div>
+    </button>
 </div>

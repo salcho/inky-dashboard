@@ -1,9 +1,4 @@
 .forecast {
     margin-right: 1em;
-}
-
-.day {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 80px;
 }

@@ -8,12 +8,16 @@ import { Weather, DataService } from '../data.service';
 })
 export class WeatherComponent {
 
+  error?: string
   weather?: Weather
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) { this.loadWeather(); }
 
   loadWeather() {
-    this.dataService.getWeather().subscribe(weather => this.weather = weather);
+    this.dataService.getWeather()
+      .subscribe(weather => { this.weather = weather; this.error = '' },
+        error => this.error = `${error.message}`,
+        () => { });
   }
 
   localizedDate(date: string) {
