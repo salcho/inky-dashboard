@@ -9,8 +9,7 @@ import { Departure, DataService, Stationboard } from '../data.service';
 export class ZvvComponent {
 
   error?: string
-  trams: Departure[] = [];
-  buses: Departure[] = [];
+  departures: Departure[] = [];
 
   constructor(private dataService: DataService) {
     this.loadStationboard();
@@ -26,38 +25,26 @@ export class ZvvComponent {
   getLatestDepartures(latest: Stationboard) {
     const stationboard: Departure[] = latest.stationboard;
 
-    const trams = new Map();
-    const buses = new Map();
+    const departures: Map<string, Departure> = new Map();
 
     for (const current of stationboard) {
-      if (current.category === "T") {
-        if (!trams.has(current.number)) {
-          trams.set(current.number, current);
-          continue;
-        }
-
-        if (current.stop.departureTimestamp < trams.get(current.number).stop.departureTimestamp) {
-          trams.set(current.number, current);
-          continue;
-        }
+      const key = `${current.category}${current.number}`;
+      const old = departures.get(key);
+      if (!old) {
+        departures.set(key, current);
+        continue;
       }
 
-      if (current.category === "B") {
-        if (!buses.has(current.number)) {
-          buses.set(current.number, current);
-          continue;
-        }
-
-        if (current.stop.departureTimestamp < buses.get(current.number).stop.departureTimestamp) {
-          buses.set(current.number, current);
-        }
+      if (current.stop.departureTimestamp < old.stop.departureTimestamp) {
+        departures.set(current.number, current);
+        continue;
       }
     }
 
-    this.trams = [];
-    this.buses = [];
-    trams.forEach(t => this.trams.push(t));
-    buses.forEach(b => this.trams.push(b));
+    this.departures = [];
+    departures.forEach(d => this.departures.push(d));
+    // sort alphabetically
+    this.departures.sort((a, b) => a.category < b.category ? 1 : -1);
   }
 
   localizedDeparture(departureTimestamp: number): string {
