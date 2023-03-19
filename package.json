@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently --kill-others 'ng serve' 'node weather-server/server.js'",
+    "start": "concurrently --kill-others 'ng serve' 'node cors-bypass-server/server.js'",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "concurrently": "^7.6.0",
+    "puppeteer": "^19.7.5",
     "rxjs": "~7.8.0",
     "service": "^0.1.4",
     "tslib": "^2.3.0",
@@ -31,6 +32,7 @@
     "@angular/cli": "~15.2.2",
     "@angular/compiler-cli": "^15.2.0",
     "@types/jasmine": "~4.3.0",
+    "@types/puppeteer": "^7.0.4",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

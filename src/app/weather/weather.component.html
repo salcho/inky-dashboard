@@ -17,6 +17,8 @@
             </div>
             <span>{{day.temperatureMin}} - {{day.temperatureMax}}</span>
         </div>
-
     </button>
+
+    <!-- signalling that we've loaded -->
+    <div *ngIf="weather.forecast.length" class="done-weather"></div>
 </div>
