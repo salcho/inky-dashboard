@@ -1,3 +1,7 @@
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+
 <mat-card *ngFor="let departure of departures">
     <mat-card-header>
         <mat-card-title-group>
@@ -7,15 +11,13 @@
             <mat-card-subtitle>
                 <span>{{localizedDeparture(departure.stop.departureTimestamp*1000)}}</span>
             </mat-card-subtitle>
-            {{departure.number}}
             <!-- <mat-card-subtitle style="margin-left: 6px">{{departure.number}}</mat-card-subtitle> -->
         </mat-card-title-group>
         <mat-card-content>
-
-            <mat-icon *ngIf="departure.category === 'T'">tram</mat-icon>
-            <mat-icon *ngIf="departure.category === 'B'">local_shipping</mat-icon>
-            <!-- <button mat-button color="primary"> -->
+            <span class="material-symbols-outlined" *ngIf="departure.category === 'T'">tram</span>
+            <span class="material-symbols-outlined" *ngIf="departure.category === 'B'">local_shipping</span>
             <br />
+            &nbsp;&nbsp;{{departure.number}}
             <!-- {{localizedDestination(departure.to)}} -->
             <!-- </button> -->
         </mat-card-content>

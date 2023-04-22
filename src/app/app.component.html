@@ -9,17 +9,20 @@
   </button>
 </mat-toolbar>
 
-<mat-grid-list cols="4" rowHeight="250px">
-  <mat-grid-tile [colspan]="3" [rowspan]="1" style="background: #DDBDF1">
-    Clock + ZVV + Bin
+<mat-grid-list cols="3" rowHeight="200px">
+  <mat-grid-tile [colspan]="3" [rowspan]="1">
+    <app-weather></app-weather>
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="1" [rowspan]="2" style="background: lightblue">
+  <!-- <mat-grid-tile [colspan]="1" [rowspan]="2">
+    Clock + ZVV + Bin
+  </mat-grid-tile> -->
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <app-entsorgung></app-entsorgung>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
     <app-zvv></app-zvv>
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="1" [rowspan]="1" style="background: lightgreen">
-    Three</mat-grid-tile>
-  <mat-grid-tile [colspan]="2" [rowspan]="1" style="background: lightpink">
-    <app-entsorgung></app-entsorgung>
-    <app-weather></app-weather>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <div>Last updated: {{showTime()}}</div>
   </mat-grid-tile>
 </mat-grid-list>

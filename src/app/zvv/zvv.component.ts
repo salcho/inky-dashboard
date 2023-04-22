@@ -27,7 +27,11 @@ export class ZvvComponent {
 
     const departures: Map<string, Departure> = new Map();
 
+    const hour = new Date().getHours();
     for (const current of stationboard) {
+      if ((hour > 18 || hour < 5) && current.category === 'B') continue;
+      if ((hour <= 18 || hour >= 5) && current.category === 'BN') continue;
+
       const key = `${current.category}${current.number}`;
       const old = departures.get(key);
       if (!old) {

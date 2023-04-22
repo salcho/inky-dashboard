@@ -33,20 +33,50 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const puppeteer = __importStar(require("puppeteer"));
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    const browser = yield puppeteer.launch({ args: ['--ignore-certificate-errors'] });
-    const page = yield browser.newPage();
-    // config - host/URL
-    yield page.goto('http://localhost:4200/');
-    yield page.waitForSelector('.done-weather');
-    yield page.waitForSelector('.done-zvv');
-    yield page.waitForSelector('.done-entsorgung');
-    // config - screen resolution, dimensions
-    yield page.setViewport({ width: 1080, height: 1024 });
-    // config - path to store image
-    yield page.screenshot({
-        path: '/tmp/screenshot.png'
+const sleep = (millis) => new Promise(r => setTimeout(r, millis));
+// poll every 3 seconds until host is up
+function connectToHost(page) {
+    return __awaiter(this, void 0, void 0, function* () {
+        while (true) {
+            try {
+                yield page.goto('http://localhost:4200/');
+                return;
+            }
+            catch (e) {
+                console.log(e);
+                yield sleep(3000);
+            }
+        }
     });
-    console.log('done');
-    yield browser.close();
+}
+function screenshot() {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log('Starting puppeteer pull...');
+        // const browser = await puppeteer.launch({ headless: false });
+        const browser = yield puppeteer.launch();
+        try {
+            console.log('Pulling latest');
+            const page = yield browser.newPage();
+            // config - screen resolution, dimensions
+            yield page.setViewport({ width: 800, height: 480 });
+            // config - URL
+            yield connectToHost(page);
+            console.log('Host is up - smile!');
+            yield page.waitForSelector('.done-weather');
+            yield page.waitForSelector('.done-zvv');
+            yield page.waitForSelector('.done-entsorgung');
+            // config - path to store image
+            yield page.screenshot({
+                path: '/tmp/screenshot.png'
+            });
+            // page.close();
+            setTimeout(screenshot, 10000);
+        }
+        catch (e) {
+            console.log(`Error: ${e}`);
+        }
+    });
+}
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    screenshot();
 }))();

@@ -32,3 +32,11 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.primary {
+    background-color: #00838F;
+}
+
+.secondary {
+    background-color: #00BCD4;
+}

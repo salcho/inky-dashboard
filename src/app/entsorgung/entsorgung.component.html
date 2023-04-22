@@ -1,5 +1,5 @@
 <div *ngIf="collection">
-    <button mat-fab extended color="accent" style="margin-right: 30px">
+    <button color="#00BCD4" mat-fab extended style="margin-right: 30px; background-color: #00BCD4;">
         <mat-icon *ngIf="collection.type === 'paper'">library_books</mat-icon>
         <mat-icon *ngIf="collection.type === 'cardboard'">inventory_2</mat-icon>
         {{localizedCollectionDate(collection.date)}}

@@ -8,4 +8,7 @@ import { DataService } from './data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  showTime() {
+    return new Date().toLocaleString("de-CH", { hour: '2-digit', minute: '2-digit' });
+  }
 }
