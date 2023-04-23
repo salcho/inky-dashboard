@@ -1,4 +1,9 @@
 .forecast {
-    margin-right: 1em;
+    margin-right: 10px;
     height: 80px;
+    width: 85px;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+    background-color: #6d60d3;
 }

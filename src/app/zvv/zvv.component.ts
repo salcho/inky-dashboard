@@ -46,7 +46,12 @@ export class ZvvComponent {
     }
 
     this.departures = [];
-    departures.forEach(d => this.departures.push(d));
+    let numBuses = 0;
+    departures.forEach(d => {
+      if (d.category === 'B' || d.category === 'BN') numBuses++;
+      if (numBuses > 3) return;
+      this.departures.push(d)
+    });
     // sort alphabetically
     this.departures.sort((a, b) => a.category < b.category ? 1 : -1);
   }

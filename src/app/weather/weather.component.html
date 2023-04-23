@@ -3,14 +3,13 @@
 
 
 <div *ngIf="weather">
-    <button mat-raised-button style="background-color: #00BCD4;" class="forecast" *ngFor="let day of weather.forecast">
+    <button mat-raised-button color="white" class="forecast" *ngFor="let day of weather.forecast">
         <!-- switch reference at https://www.meteoswiss.admin.ch/dam/jcr:cb03e6a3-521f-4608-8a09-c9c03d742272/Wettericons_20220214.pdf -->
         <div>
             {{localizedDate(day.dayDate)}}
             <div [ngSwitch]="true">
                 <mat-icon *ngSwitchCase="day.iconDay >= 1 && day.iconDay <= 3">sunny</mat-icon>
                 <mat-icon *ngSwitchCase="day.iconDay >= 4 && day.iconDay <= 5">cloud</mat-icon>
-                <!-- <span class="material-symbols-outlined" -->
                 <mat-icon *ngSwitchCase="day.iconDay >= 6 && day.iconDay <= 11">water</mat-icon>
                 <mat-icon *ngSwitchCase="day.iconDay >= 12 && day.iconDay <= 25">thunderstorm</mat-icon>
                 <mat-icon *ngSwitchCase="day.iconDay >= 26 && day.iconDay <= 35">foggy</mat-icon>

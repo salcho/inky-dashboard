@@ -17,7 +17,9 @@
             <span class="material-symbols-outlined" *ngIf="departure.category === 'T'">tram</span>
             <span class="material-symbols-outlined" *ngIf="departure.category === 'B'">local_shipping</span>
             <br />
-            &nbsp;&nbsp;{{departure.number}}
+            <span *ngIf="departure.number > '100'">&nbsp;&nbsp;</span>
+
+            {{departure.number}}
             <!-- {{localizedDestination(departure.to)}} -->
             <!-- </button> -->
         </mat-card-content>

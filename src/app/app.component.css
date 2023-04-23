@@ -1,10 +1,5 @@
-body {
-    width: 800px;
-    height: 400px;
-}
-
 mat-grid-list {
-    background: #0097A7;
+    background: #dabcfe;
 }
 
 .mat-toolbar.mat-primary {
@@ -18,4 +13,13 @@ mat-grid-list {
     transform: translateX(-50%) translateY(-50%);
     color: black;
     letter-spacing: 7px;
+}
+
+
+.timestamp {
+    display: block;
+    padding-top: 10px;
+    color: black;
+    font-size: x-large;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }

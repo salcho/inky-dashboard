@@ -28,9 +28,11 @@ svg.material-icons:not(:last-child) {
 
 html,
 body {
-    height: 100%;
+    width: 800px;
+    height: 480px;
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    color: white;
 }
 
 .primary {
