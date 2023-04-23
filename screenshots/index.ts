@@ -15,9 +15,13 @@ async function connectToHost(page: Page) {
     }
 }
 
-async function screenshot() {
-    // const browser = await puppeteer.launch({ headless: false });
-    const browser = await puppeteer.launch();
+async function screenshot(debug: boolean) {
+    let browser;
+    if (debug) {
+        browser = await puppeteer.launch({ headless: false });
+    } else {
+        browser = await puppeteer.launch();
+    }
 
     try {
         console.log('Pulling latest');
@@ -28,23 +32,38 @@ async function screenshot() {
         await page.setViewport({ width: 800, height: 480 });
         // config - URL
         await connectToHost(page);
-        console.log('Cheese!');
 
         await page.waitForSelector('.done-weather');
         await page.waitForSelector('.done-zvv');
         await page.waitForSelector('.done-entsorgung');
 
+        await sleep(3000);
+
+        console.log('Cheese!');
         // config - path to store image
         await page.screenshot({
-            path: '/tmp/screenshot.png'
+            // type: 'jpeg',
+            omitBackground: true,
+            path: '/tmp/screenshot.png',
+            clip: {
+                x: 0,
+                y: 0,
+                width: 800,
+                height: 480,
+            }
         });
 
-        setTimeout(screenshot, 30000);
+        if (!debug) {
+            browser.close();
+        }
+
+        setTimeout(() => screenshot(debug), 30000);
     } catch (e) {
         console.log(`Error: ${e}`);
     }
 }
 
 (async () => {
-    screenshot();
+    const arg = process.argv.slice(2);
+    screenshot(arg.length > 0 && arg[0] === '--debug');
 })();

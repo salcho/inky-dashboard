@@ -43,17 +43,20 @@ function connectToHost(page) {
                 return;
             }
             catch (e) {
-                console.log(e);
                 yield sleep(3000);
             }
         }
     });
 }
-function screenshot() {
+function screenshot(debug) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('Starting puppeteer pull...');
-        // const browser = await puppeteer.launch({ headless: false });
-        const browser = yield puppeteer.launch();
+        let browser;
+        if (debug) {
+            browser = yield puppeteer.launch({ headless: false });
+        }
+        else {
+            browser = yield puppeteer.launch();
+        }
         try {
             console.log('Pulling latest');
             const page = yield browser.newPage();
@@ -61,16 +64,27 @@ function screenshot() {
             yield page.setViewport({ width: 800, height: 480 });
             // config - URL
             yield connectToHost(page);
-            console.log('Host is up - smile!');
             yield page.waitForSelector('.done-weather');
             yield page.waitForSelector('.done-zvv');
             yield page.waitForSelector('.done-entsorgung');
+            yield sleep(3000);
+            console.log('Cheese!');
             // config - path to store image
             yield page.screenshot({
-                path: '/tmp/screenshot.png'
+                // type: 'jpeg',
+                omitBackground: true,
+                path: '/tmp/screenshot.png',
+                clip: {
+                    x: 0,
+                    y: 0,
+                    width: 800,
+                    height: 480,
+                }
             });
-            // page.close();
-            setTimeout(screenshot, 10000);
+            if (!debug) {
+                browser.close();
+            }
+            setTimeout(() => screenshot(debug), 30000);
         }
         catch (e) {
             console.log(`Error: ${e}`);
@@ -78,5 +92,6 @@ function screenshot() {
     });
 }
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    screenshot();
+    const arg = process.argv.slice(2);
+    screenshot(arg.length > 0 && arg[0] === '--debug');
 }))();
