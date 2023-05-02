@@ -44,7 +44,7 @@ async function screenshot(debug: boolean) {
         await page.screenshot({
             // type: 'jpeg',
             omitBackground: true,
-            path: '/tmp/screenshot.png',
+            path: './screenshot.png',
             clip: {
                 x: 0,
                 y: 0,

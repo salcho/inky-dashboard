@@ -22,7 +22,7 @@ jobs:
       run: npm start
 
     - name: screenshotter
-      run: bash -c ls /tmp
+      run: bash -c ls -lh screenshot.png 
     #- name: Commit changes
       #run: |
         #git config --global user.email "you@example.com"  # Replace with your email address
