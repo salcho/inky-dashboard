@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently -n webserver,cors-bypass,screenshot 'ng serve' 'node cors-bypass-server/server.js' 'cd screenshots && npx tsc && node index.js' --kill-others-on-fail",
+    "start": "(ng serve &) && (node cors-bypass-server/server.js &) && (cd screenshots && npx tsc && node index.js)",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
