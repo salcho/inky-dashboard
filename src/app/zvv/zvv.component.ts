@@ -27,7 +27,7 @@ export class ZvvComponent {
 
     const departures: Map<string, Departure> = new Map();
 
-    const hour = new Date().getHours();
+    const hour = parseInt(new Date().toLocaleString("de-CH", { hour: "numeric", timeZone: "Europe/Zurich" }));
     for (const current of stationboard) {
       if ((hour > 18 || hour < 5) && current.category === 'B') continue;
       if ((hour <= 18 || hour >= 5) && current.category === 'BN') continue;

@@ -94,6 +94,4 @@ function screenshot(debug) {
 (() => __awaiter(void 0, void 0, void 0, function* () {
     const arg = process.argv.slice(2);
     yield screenshot(arg.length > 0 && arg[0] === '--debug');
-    // kill with a non-zero exit code so `concurrently` knows when to stop all other processes
-    // return process.kill(2);
 }))();
