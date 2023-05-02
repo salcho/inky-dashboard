@@ -23,6 +23,12 @@ jobs:
 
     - name: screenshotter
       run: bash -c ls -lh screenshot.png 
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: output
+        path: /tmp/screenshot.png
     #- name: Commit changes
       #run: |
         #git config --global user.email "you@example.com"  # Replace with your email address
