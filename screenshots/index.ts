@@ -1,5 +1,6 @@
 import * as puppeteer from 'puppeteer';
 import { Page } from 'puppeteer';
+import { createCanvas, loadImage } from 'canvas';
 
 const sleep = (millis: number) => new Promise(r => setTimeout(r, millis));
 
@@ -52,6 +53,17 @@ async function screenshot(debug: boolean) {
                 height: 480,
             }
         });
+
+        // turn the PNG into a data URL so we can upload it anywhere
+        const img = await loadImage('/tmp/screenshot.png');
+        const canvas = createCanvas(img.width, img.height);
+        const ctx = canvas.getContext('2d');
+
+        ctx.drawImage(img, 0, 0);
+
+        const dataUrl = canvas.toDataURL('image/png');
+
+        console.log(dataUrl);
 
         if (!debug) {
             browser.close();

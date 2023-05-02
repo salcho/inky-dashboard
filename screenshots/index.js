@@ -33,6 +33,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const puppeteer = __importStar(require("puppeteer"));
+const canvas_1 = require("canvas");
 const sleep = (millis) => new Promise(r => setTimeout(r, millis));
 // poll every 3 seconds until host is up
 function connectToHost(page) {
@@ -81,6 +82,13 @@ function screenshot(debug) {
                     height: 480,
                 }
             });
+            // turn the PNG into a data URL so we can upload it anywhere
+            const img = yield (0, canvas_1.loadImage)('/tmp/screenshot.png');
+            const canvas = (0, canvas_1.createCanvas)(img.width, img.height);
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            const dataUrl = canvas.toDataURL('image/png');
+            console.log(dataUrl);
             if (!debug) {
                 browser.close();
             }
