@@ -84,7 +84,7 @@ function screenshot(debug) {
             if (!debug) {
                 browser.close();
             }
-            setTimeout(() => screenshot(debug), 30000);
+            console.log('Done!');
         }
         catch (e) {
             console.log(`Error: ${e}`);
@@ -93,5 +93,6 @@ function screenshot(debug) {
 }
 (() => __awaiter(void 0, void 0, void 0, function* () {
     const arg = process.argv.slice(2);
-    screenshot(arg.length > 0 && arg[0] === '--debug');
+    yield screenshot(arg.length > 0 && arg[0] === '--debug');
+    return process.kill(2);
 }))();

@@ -57,7 +57,7 @@ async function screenshot(debug: boolean) {
             browser.close();
         }
 
-        setTimeout(() => screenshot(debug), 30000);
+        console.log('Done!');
     } catch (e) {
         console.log(`Error: ${e}`);
     }
@@ -65,5 +65,7 @@ async function screenshot(debug: boolean) {
 
 (async () => {
     const arg = process.argv.slice(2);
-    screenshot(arg.length > 0 && arg[0] === '--debug');
+    await screenshot(arg.length > 0 && arg[0] === '--debug');
+    // kill with a non-zero exit code so `concurrently` knows when to stop all other processes
+    return process.kill(2);
 })();
