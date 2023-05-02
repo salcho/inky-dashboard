@@ -20,25 +20,3 @@ jobs:
 
     - name: Call screenshotter
       run: npm start
-
-    - name: screenshotter
-      run: bash -c ls -lh screenshot.png 
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: output
-        path: /tmp/screenshot.png
-    #- name: Commit changes
-      #run: |
-        #git config --global user.email "you@example.com"  # Replace with your email address
-        #git config --global user.name "Your Name"  # Replace with your name
-        #git add .
-        #git commit -m "Update data"  # Replace with your own commit message
-
-    #- name: Push changes
-      #uses: ad-m/github-push-action@master
-      #with:
-        #github_token: ${{ secrets.GITHUB_TOKEN }}
-        #branch: main  # Replace with the name of the branch you want to push to
-
